@@ -38,6 +38,8 @@ namespace FactorioLoader.Main.Helpers
             var listSortOrder = GetListSortDirectionFromSortOrder(sortOrder);
 
             grid.Rows.Clear();
+
+            //If there are no rows left at all in the grid then it breaks for some reason
             if (mods.Count <= 0)
             {
                 grid.Rows.Add();
@@ -49,11 +51,14 @@ namespace FactorioLoader.Main.Helpers
                 grid.Rows.Add(mod.Title ?? mod.Name, mod.Version);
             }
 
+            //If the old scroll position was higher than the current number of items then reset
+            //the scroll position
             if (scrollIndex > grid.RowCount - 1 || scrollIndex < 0)
             {
                 return;
             }
             
+            //Resort the grid if it was sorted
             if (sortColumn != null) grid.Sort(sortColumn, listSortOrder);
 
             grid.FirstDisplayedScrollingRowIndex = scrollIndex;
