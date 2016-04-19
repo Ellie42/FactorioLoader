@@ -34,6 +34,7 @@ namespace FactorioLoader.Main.Database
                 "(" +
                 "mod_data_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT NOT NULL, " +
+                "title TEXT, " +
                 "description TEXT, " +
                 "version TEXT, " +
                 "author TEXT, " +

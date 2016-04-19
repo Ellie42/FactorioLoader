@@ -72,6 +72,10 @@ namespace FactorioLoader.Main.Models.Config
             {
                 RequestModFolder();
             }
+            if (ModFolder==null)
+            {
+                Application.Exit();
+            }
             if (ExecutablePath==null||ExecutablePath.Length <= 0)
             {
                 RequestExecutableFolder();
@@ -81,7 +85,7 @@ namespace FactorioLoader.Main.Models.Config
         /// <summary>
         /// Show the file browser dialog for factorio.exe
         /// </summary>
-        private void RequestExecutableFolder()
+        public void RequestExecutableFolder()
         {
             var filePrompt = new OpenFileDialog();
             filePrompt.Multiselect = false;
@@ -91,16 +95,12 @@ namespace FactorioLoader.Main.Models.Config
                 ExecutablePath = filePrompt.FileName;
                 changed = true;
             }
-            else
-            {
-                Application.Exit();
-            }
         }
 
         /// <summary>
         /// Show the folder browser dialog for the mod folder
         /// </summary>
-        private void RequestModFolder()
+        public void RequestModFolder()
         {
             var folderPrompt = new FolderBrowserDialog();
             folderPrompt.Description = @"Select the folder where Factorio stores mods";
@@ -110,10 +110,6 @@ namespace FactorioLoader.Main.Models.Config
             {
                 ModFolder = folderPrompt.SelectedPath;
                 changed = true;
-            }
-            else
-            {
-                Application.Exit();
             }
         }
 

@@ -96,20 +96,36 @@
     <Compile Include="Main\Database\DatabaseFacade.cs" />
     <Compile Include="Main\Database\DatabaseSetup.cs" />
     <Compile Include="Main\Database\ModDatabaseSetup.cs" />
+    <Compile Include="Main\Exceptions\PathMissingException.cs" />
     <Compile Include="Main\FactorioLoader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Main\Forms\CreateProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Forms\CreateProfileForm.Designer.cs">
+      <DependentUpon>CreateProfileForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main\Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\Forms\ModLoaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main\Forms\ProfileEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main\Forms\ProfileEditForm.Designer.cs">
       <DependentUpon>ProfileEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\Helpers\FormControlHelper.cs" />
     <Compile Include="Main\Models\Config\LoaderConfig.cs" />
@@ -135,11 +151,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Main\Forms\CreateProfileForm.resx">
+      <DependentUpon>CreateProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\Forms\ProfileEditForm.resx">
       <DependentUpon>ProfileEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -186,4 +208,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <MoveToLibFolder Include="$(OutputPath)*.dll ; $(OutputPath)*.pdb ; $(OutputPath)*.xml" />
+    </ItemGroup>
+    <Move SourceFiles="@(MoveToLibFolder)" DestinationFolder="$(OutputPath)lib" OverwriteReadOnlyFiles="true" />
+  </Target>
 </Project>

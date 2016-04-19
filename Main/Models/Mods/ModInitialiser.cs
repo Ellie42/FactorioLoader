@@ -21,6 +21,7 @@ namespace FactorioLoader.Main.Models.Mods
             Author = GetValueFromJson(json, "author") as string;
             DependencyString = GetValueFromJson(json, "dependencies") as string;
             Version = GetValueFromJson(json, "version") as string;
+            Title = GetValueFromJson(json, "title") as string;
 
             var splitPath = folderPath.Split('\\');
             FolderName = splitPath[splitPath.Length-1];

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Windows.Ink;
 using FactorioLoader.Main.Models.Mods;
 
 namespace FactorioLoader.Main.Models.Profile
 {
-    public class ModProfile
+    public class ModProfile : IEquatable<ModProfile>
     {
         public string Name;
         public string Description;
-        public int Id;
+        public int? Id;
         public List<Mod> Mods = new List<Mod>();
 
         /// <summary>
@@ -84,6 +85,10 @@ namespace FactorioLoader.Main.Models.Profile
         /// </summary>
         public void Save()
         {
+            //If there is no ID then this is a new profile not from the DB
+            //Add the basic profile data to the DB
+            if (Id == null) SaveProfileData();
+
             //Basic delete SQL always needed
             var sql = 
                 "DELETE FROM mod_profiles_mods "+
@@ -108,6 +113,36 @@ namespace FactorioLoader.Main.Models.Profile
 
                     connection.Open();
                     command.ExecuteNonQuery();
+                    connection.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set the current profile Id to the last inserted Id
+        /// </summary>
+        /// <param name="connection"></param>
+        private void SetInsertId(SQLiteConnection connection)
+        {
+            Id = (int)connection.LastInsertRowId;
+        }
+
+        private void SaveProfileData()
+        {
+            var sql = "INSERT INTO mod_profiles (name,description)" +
+                      "VALUES (@name,@description)";
+
+            using (var connection = App.FactorioLoader.Db.Connection)
+            {
+                using (var command = new SQLiteCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SQLiteParameter("@name") {Value = Name});
+                    command.Parameters.Add(new SQLiteParameter("@description") {Value = Description});
+                    command.Prepare();
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    SetInsertId(connection);
                     connection.Dispose();
                 }
             }
@@ -153,6 +188,41 @@ namespace FactorioLoader.Main.Models.Profile
             }
 
             return values;
+        }
+
+        /// <summary>
+        /// Return a diff of mods that exist in presentMods but not in Profile.Mods
+        /// </summary>
+        /// <param name="presentMods"></param>
+        /// <returns></returns>
+        public List<Mod> GetModsNotInProfile(List<Mod> presentMods)
+        {
+            return presentMods.FindAll((search => !Mods.Contains(search)));
+        }
+
+        public void Delete()
+        {
+            var sql = "PRAGMA foreign_keys=ON;DELETE FROM mod_profiles " +
+                      "WHERE mod_profile_id=@id";
+
+            using (var connection = App.FactorioLoader.Db.Connection)
+            {
+                using (var command = new SQLiteCommand(sql, connection))
+                {
+                    connection.Open();
+                    command.Parameters.Add(new SQLiteParameter("@id")
+                    {
+                        Value = Id
+                    });
+                    command.ExecuteNonQuery();
+                    connection.Dispose();
+                }
+            }
+        }
+
+        public bool Equals(ModProfile other)
+        {
+            return other.Name == Name;
         }
     }
 }

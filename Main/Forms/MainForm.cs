@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 using FactorioLoader.Main.Helpers;
+using MetroFramework;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 
 namespace FactorioLoader.Main.Forms
 {
-    public partial class MainForm : MetroForm
+    public partial class MainForm : ModLoaderForm
     {
-        protected Form ActiveChildForm;
 
         public MainForm()
         {
@@ -21,6 +23,18 @@ namespace FactorioLoader.Main.Forms
             UpdateAllModDisplays();
         }
 
+//        private void DrawProfileComboBoxItem(object sender, DrawItemEventArgs e)
+//        {
+//            if(e.Index < 0) return;
+//            Font font = profileComboBox.Font;
+//            Brush brush = Brushes.Black;
+//            var text = profileComboBox.Items[e.Index] as string;
+//
+//            if (e.Index==profileComboBox.Items.Count-1) font = new Font(font, FontStyle.Bold);
+//
+//            e.Graphics.DrawString(text, font, brush, e.Bounds);
+//        }
+
         /// <summary>
         /// When selecting a new profile
         /// </summary>
@@ -29,8 +43,28 @@ namespace FactorioLoader.Main.Forms
         private void profileComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             MetroComboBox comboBox = (MetroComboBox) sender;
+            if (comboBox.SelectedItem.ToString() == "Add New Profile")
+            {
+                comboBox.SelectedIndex = 0;
+                AddNewProfile();
+            }
             App.FactorioLoader.Profiles.ChangeProfile(comboBox.Text);
             ShowProfileData();
+        }
+
+        public void AddNewProfile()
+        {
+            var form = new CreateProfileForm();
+            form.Closed += (sender, args) =>
+            {
+                if (form.NewProfile != null)
+                {
+                    App.FactorioLoader.Profiles.ChangeProfile(form.NewProfile.Name);
+                    UpdateAllModDisplays();
+                    ShowChildForm(new ProfileEditForm());
+                }
+            }; 
+            ShowChildForm(form);
         }
 
         /// <summary>
@@ -63,11 +97,28 @@ namespace FactorioLoader.Main.Forms
         private void UpdateProfileComboBox()
         {
             FormControlHelper.PopulateProfileComboBox(profileComboBox);
+            profileComboBox.Items.Add(@"Add New Profile");
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
-
+            var exePath = App.FactorioLoader.Config.ExecutablePath;
+            if (exePath == null || exePath.Length <= 0)
+            {
+                MetroMessageBox.Show(this, "Factorio.exe path is missing :(.\nPlease set the path before continuing.",
+                    "Executable Path Missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            App.FactorioLoader.Mods.PrepareCurrentProfileMods();
+            try
+            {
+                Process.Start(App.FactorioLoader.Config.ExecutablePath);
+            }
+            catch (Exception)
+            {
+                MetroMessageBox.Show(this, 
+                    "Could not start factorio.exe, please check the executable path.",
+                    "Could Not Start Factorio",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -78,36 +129,23 @@ namespace FactorioLoader.Main.Forms
         private void editProfileTile_Click(object sender, EventArgs e)
         {
             var profileEditForm = new ProfileEditForm();
-            ShowChildForm(profileEditForm);
+            profileEditForm.Closing += ProfileEditForm_Closing1;
+            ShowChildForm(profileEditForm); 
         }
 
-        /// <summary>
-        /// Show a form if no other child form is open, and set parent to this form
-        /// </summary>
-        /// <param name="form"></param>
-        private void ShowChildForm(Form form)
+        private void ProfileEditForm_Closing1(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (ActiveChildForm != null) return;
-
-            Enabled = false;
-
-            ActiveChildForm = form;
-            form.FormClosing += ClosingChildForm;
-            form.Show(this);
-        }
-
-        /// <summary>
-        /// When child form closes make sure to clear the activeChildForm variable so new
-        /// forms can be opened
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="formClosingEventArgs"></param>
-        private void ClosingChildForm(object sender, FormClosingEventArgs formClosingEventArgs)
-        {
-            Enabled = true;
-            ActiveChildForm = null;
-            Focus();
             UpdateAllModDisplays();
+        }
+
+        private void newProfileTile_Click(object sender, EventArgs e)
+        {
+            AddNewProfile();
+        }
+
+        private void settingsTile_Click(object sender, EventArgs e)
+        {
+            ShowChildForm(new SettingsForm());
         }
     }
 }

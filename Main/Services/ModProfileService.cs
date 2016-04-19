@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Linq;
 using FactorioLoader.Main.Models.Mods;
 using FactorioLoader.Main.Models.Profile;
 
@@ -77,6 +78,32 @@ namespace FactorioLoader.Main.Services
         public void ChangeProfile(string name)
         {
             CurrentProfile = Profiles.Find((searchProfile) => searchProfile.Name == name);
+        }
+
+        public ModProfile CreateProfileAndSave(string name,string desc="")
+        {
+            //TODO Check for name conflicts
+            var profile = CreateProfile(name,desc);
+            profile.Save();
+            return profile;
+        }
+
+        public ModProfile CreateProfile(string name, string desc="")
+        {
+            var newProfile = new ModProfile()
+            {
+                Name = name,
+                Description = desc
+            };
+
+            Profiles.Add(newProfile);
+            return newProfile;
+        }
+
+        public void RemoveCurrentProfile()
+        {
+            Profiles.Remove(CurrentProfile);
+            CurrentProfile = Profiles.First();
         }
     }
 }
