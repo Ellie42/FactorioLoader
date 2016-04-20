@@ -17,6 +17,8 @@ namespace FactorioLoader.Main.Forms
             InitializeComponent();
         }
 
+        public string[] Args { get; set; }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             App.FactorioLoader.RunApp();

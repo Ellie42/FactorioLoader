@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using FactorioLoader.Main.Database;
 using FactorioLoader.Main.Forms;
 using FactorioLoader.Main.Models.Config;
+using FactorioLoader.Main.Models.Mods;
 using FactorioLoader.Main.Models.Profile;
 using FactorioLoader.Main.Services;
+using Microsoft.VisualBasic.ApplicationServices;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace FactorioLoader.Main
 {
@@ -43,17 +50,6 @@ namespace FactorioLoader.Main
             }
         }
 
-//        public void Run()
-//        {
-//            MainForm = new MainForm();
-//
-//            Application.Run(MainForm);
-//        }
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool SetForegroundWindow(IntPtr hWnd);
-
         public void Run()
         {
             Application.EnableVisualStyles();
@@ -61,54 +57,43 @@ namespace FactorioLoader.Main
 
             MainForm = new MainForm();
 
-            bool created;
-            var sEvent = new EventWaitHandle(false,
-                EventResetMode.ManualReset, "factorioLoader", out created);
+            var controller = new ApplicationController(MainForm);
+            controller.StartupNextInstance += NewInstanceOpened;
 
-            //If Event already created
-            if (created)
+            var args = Environment.GetCommandLineArgs();
+
+            controller.Run(args);
+        }
+
+        private void NewInstanceOpened(object sender, StartupNextInstanceEventArgs e)
+        {
+            var controller = sender as ApplicationController;
+            var args = e.CommandLine;
+
+            if (args.Count > 1)
             {
-                Application.Run(MainForm);
-            }
-            else
-            {
-                Process current = Process.GetCurrentProcess();
-
-                foreach (Process process in Process.GetProcessesByName("FactorioLoader"))
-                {
-                    if (process.Id != current.Id)
-                    {
-                        process.Refresh();
-                        var windows = GetProcessWindows(process.Id);
-
-                        SetForegroundWindow(windows[0]);
-                        break;
-                    }
-                }
-                Application.Exit();
+                ImportFromArgs(args);
             }
         }
 
-        [DllImport("user32.dll")]
-        public static extern IntPtr FindWindowEx(IntPtr parentWindow, IntPtr previousChildWindow, string windowClass, string windowTitle);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetWindowThreadProcessId(IntPtr window, out int process);
-
-        private IntPtr[] GetProcessWindows(int process)
+        /// <summary>
+        /// Import a mod from cli arguments
+        /// </summary>
+        /// <param name="args"></param>
+        private void ImportFromArgs(ReadOnlyCollection<string> args)
         {
-            IntPtr[] apRet = (new IntPtr[256]);
-            int iCount = 0;
-            IntPtr pLast = IntPtr.Zero;
-            do
+            var factorioBase64 = Regex.Match(args[1], @"factoriomods:\/*?([a-zA-Z0-9=]+)");
+            if (factorioBase64.Groups.Count <= 1) return;
+
+            var jsonBytes = Convert.FromBase64String(factorioBase64.Groups[1].ToString());
+            var jsonString = System.Text.Encoding.Default.GetString(jsonBytes);
+            var json = JsonConvert.DeserializeObject<JObject>(jsonString);
+
+            var mod = new Mod(json);
+            if (!mod.HaveFiles)
             {
-                pLast = FindWindowEx(IntPtr.Zero, pLast, null, null);
-                int iProcess_;
-                GetWindowThreadProcessId(pLast, out iProcess_);
-                if (iProcess_ == process) apRet[iCount++] = pLast;
-            } while (pLast != IntPtr.Zero);
-            System.Array.Resize(ref apRet, iCount);
-            return apRet;
+                MainForm.ShowForm(new ImportModForm(mod));
+            }
         }
 
         public void RunApp()
@@ -124,6 +109,40 @@ namespace FactorioLoader.Main
 
             //Load and prepare profile data
             Profiles.Init();
+        }
+    }
+    public class ApplicationController : WindowsFormsApplicationBase
+    {
+        private Form mainForm;
+        public ApplicationController(Form form)
+        {
+            //We keep a reference to main form 
+            //To run and also use it when we need to bring to front
+            mainForm = form;
+            this.IsSingleInstance = true;
+            this.StartupNextInstance += this_StartupNextInstance;
+        }
+
+        void this_StartupNextInstance(object sender, StartupNextInstanceEventArgs e)
+        {
+            // Copy the arguments to a string array
+            string[] args = new string[e.CommandLine.Count];
+            e.CommandLine.CopyTo(args, 0);
+
+            //Here we bring application to front
+            e.BringToForeground = true;
+            mainForm.ShowInTaskbar = true;
+            mainForm.WindowState = FormWindowState.Minimized;
+            mainForm.Show();
+            mainForm.WindowState = FormWindowState.Normal;
+
+        }
+
+        protected override void OnCreateMainForm()
+        {
+            this.MainForm = mainForm;
+            if (CommandLineArgs.Count <= 1) return; 
+            this.CommandLineArgs.CopyTo(((MainForm)this.MainForm).Args, 0);
         }
     }
 }

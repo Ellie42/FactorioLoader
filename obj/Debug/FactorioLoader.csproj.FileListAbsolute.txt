@@ -1,7 +1,6 @@
 c:\users\sophie\documents\visual studio 2015\Projects\FactorioLoader\FactorioLoader\bin\Debug\FactorioLoader.exe.config
 c:\users\sophie\documents\visual studio 2015\Projects\FactorioLoader\FactorioLoader\bin\Debug\FactorioLoader.exe
 c:\users\sophie\documents\visual studio 2015\Projects\FactorioLoader\FactorioLoader\bin\Debug\FactorioLoader.pdb
-c:\users\sophie\documents\visual studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.csprojResolveAssemblyReference.cache
 c:\users\sophie\documents\visual studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.Properties.Resources.resources
 c:\users\sophie\documents\visual studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.csproj.GenerateResource.Cache
 c:\users\sophie\documents\visual studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.exe
@@ -23,3 +22,5 @@ C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoa
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.Main.Forms.CreateProfileForm.resources
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.Main.Forms.SettingsForm.resources
+C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.csprojResolveAssemblyReference.cache
+C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.Main.Forms.ImportModForm.resources

@@ -67,12 +67,14 @@
       <HintPath>..\packages\MetroModernUI.1.3.5.0\lib\net45\MetroFramework.Fonts.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.100.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SQLite.Core.1.0.100.0\lib\net451\System.Data.SQLite.dll</HintPath>
@@ -115,6 +117,12 @@
     </Compile>
     <Compile Include="Main\Forms\CreateProfileForm.Designer.cs">
       <DependentUpon>CreateProfileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Forms\ImportModForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\Forms\ImportModForm.Designer.cs">
+      <DependentUpon>ImportModForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -164,6 +172,9 @@
     <EmbeddedResource Include="Main\Forms\CreateProfileForm.resx">
       <DependentUpon>CreateProfileForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Main\Forms\ImportModForm.resx">
+      <DependentUpon>ImportModForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +188,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -185,7 +197,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="NewFolder1\App.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

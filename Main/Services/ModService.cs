@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using FactorioLoader.Main.Exceptions;
 using FactorioLoader.Main.Models.Mods;
+using MetroFramework;
+using Newtonsoft.Json.Linq;
+using MessageBox = System.Windows.MessageBox;
 
 namespace FactorioLoader.Main.Services
 {

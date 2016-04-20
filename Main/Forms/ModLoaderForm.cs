@@ -11,7 +11,7 @@ namespace FactorioLoader.Main.Forms
         /// Show a form if no other child form is open, and set parent to this form
         /// </summary>
         /// <param name="form"></param>
-        protected void ShowChildForm(Form form)
+        public void ShowChildForm(Form form)
         {
             if (ActiveChildForm != null) return;
 
@@ -19,6 +19,12 @@ namespace FactorioLoader.Main.Forms
 
             ActiveChildForm = form;
             form.FormClosing += ClosingChildForm;
+            form.Show(this);
+        }
+
+        public void ShowForm(Form form)
+        {
+            form.Shown += (s, e) => form.Activate();
             form.Show(this);
         }
 

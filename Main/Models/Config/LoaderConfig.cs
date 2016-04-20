@@ -13,6 +13,7 @@ namespace FactorioLoader.Main.Models.Config
         protected DatabaseFacade Db;
         public string ModFolder;
         public string ReserveFolder => ModFolder + "\\000-FL-Available-Mods";
+        public string ArchiveFolder => ReserveFolder + "\\000-FL-Archives";
         public string ExecutablePath;
         public string DefaultProfile;
         private bool changed = false;
