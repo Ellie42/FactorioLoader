@@ -81,7 +81,7 @@ namespace FactorioLoader.Main.Models.Profile
         }
 
         /// <summary>
-        /// Save all profile mod data to the DB
+        /// Save all profile Mod data to the DB
         /// </summary>
         public void Save()
         {
@@ -107,7 +107,7 @@ namespace FactorioLoader.Main.Models.Profile
                         sql += GetModInsertQueryValues();
                     }
 
-                    //Add all mod params OR just the @profileId if there are no mods
+                    //Add all Mod params OR just the @profileId if there are no mods
                     command.Parameters.AddRange(GetModInsertParameters());
                     command.CommandText = sql;
 
@@ -149,7 +149,7 @@ namespace FactorioLoader.Main.Models.Profile
         }
 
         /// <summary>
-        /// Returns the SQLite params needed for the mod insertion,
+        /// Returns the SQLite params needed for the Mod insertion,
         /// if there are no mods to insert then just return the profile id param
         /// </summary>
         /// <returns></returns>

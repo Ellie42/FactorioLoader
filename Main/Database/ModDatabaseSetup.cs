@@ -64,9 +64,9 @@ namespace FactorioLoader.Main.Database
                 "CREATE TABLE IF NOT EXISTS mod_profiles (" +
                 "mod_profile_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT NOT NULL, " +
-                "description TEXT DEFAULT 'Indescribably amazing mod profile.'" +
+                "description TEXT DEFAULT 'Indescribably amazing Mod profile.'" +
                 "); CREATE UNIQUE INDEX unique_profile_name ON mod_profiles(name);" +
-                "INSERT INTO mod_profiles (name,description) VALUES ('Default','The default mod profile.')"
+                "INSERT INTO mod_profiles (name,description) VALUES ('Default','The default Mod profile.')"
                 ,connection);
 
             modProfileTableSql.ExecuteNonQuery();

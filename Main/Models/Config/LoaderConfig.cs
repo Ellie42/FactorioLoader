@@ -99,7 +99,7 @@ namespace FactorioLoader.Main.Models.Config
         }
 
         /// <summary>
-        /// Show the folder browser dialog for the mod folder
+        /// Show the folder browser dialog for the Mod folder
         /// </summary>
         public void RequestModFolder()
         {

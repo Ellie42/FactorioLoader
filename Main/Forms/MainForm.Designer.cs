@@ -248,6 +248,7 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Factorio Loader";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.mainPanel.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.profileModsGrid)).EndInit();

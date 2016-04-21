@@ -23,9 +23,29 @@ namespace FactorioLoader.Main.Forms
             modVersion.Text = mod.Version;
         }
 
+        /// <summary>
+        /// Download and extract the Mod
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void downloadButton_Click(object sender, EventArgs e)
         {
-            Mod.Download(modDownloadProgress);
+            var extracted = false;
+            downloadButton.Enabled = false;
+            downloadStatus.Text = @"Downloading Files";
+            Mod.Download(modDownloadProgress, (obj,args) =>
+            {
+                if (args.ProgressPercentage < 100 || extracted) return;
+
+                modDownloadProgress.Value = 0;
+
+                downloadStatus.Text = @"Extracting Files";
+                Mod.Extract(modDownloadProgress);
+                downloadStatus.Text = @"Done!";
+                cancelButton.Text = @"Close";
+                App.FactorioLoader.Mods.Init();
+                extracted = true;
+            });
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

@@ -36,7 +36,7 @@ namespace FactorioLoader.Main.Models.Mods
         }
 
         /// <summary>
-        /// Create mod using downloaded JSON
+        /// Create Mod using downloaded JSON
         /// </summary>
         /// <param name="json"></param>
         public Mod(JObject json)
@@ -53,8 +53,8 @@ namespace FactorioLoader.Main.Models.Mods
             var release = json["releases"][0];
             Id = release["id"].Value<string>();
             Version = release["version"].Value<string>();
-            Url = release["files"][0]["url"].Value<string>() ?? release["files"][0]["mirror"].Value<string>();
-
+            Url = release["files"][0]["url"].Value<string>();
+            Mirror = release["files"][0]["mirror"].Value<string>();
         }
 
         /// <summary>

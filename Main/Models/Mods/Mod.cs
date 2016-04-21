@@ -1,8 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
+using System.IO.Packaging;
+using System.Linq.Expressions;
 using System.Net;
+using System.Security.Permissions;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using FactorioLoader.Main.Helpers;
+using FactorioLoader.Main.Services;
 using MetroFramework.Controls;
 
 namespace FactorioLoader.Main.Models.Mods
@@ -16,6 +22,7 @@ namespace FactorioLoader.Main.Models.Mods
         public string Author;
         //ID/URL are the version specific DownloadURL and ID
         public string Url;
+        public string Mirror;
         public string Id;
         //General ID/URL are the factoriomods ID/URL for the base project
         public string GeneralId;
@@ -23,10 +30,12 @@ namespace FactorioLoader.Main.Models.Mods
         public string DependencyString;
         public string FolderName;
         public string HomePage;
+        public string ArchivePath;
         public bool InReserve = false;
         public bool HaveFiles = false;
         public bool HaveData = true;
-         
+        public bool HaveArchive; 
+
         public bool Equals(Mod other)
         {
             return other.Name == Name && other.Version == Version;
@@ -43,38 +52,41 @@ namespace FactorioLoader.Main.Models.Mods
                 FolderName;
         }
 
+        /// <summary>
+        /// Move the Mod to the reserve folder
+        /// </summary>
         public void MoveToReserve()
         {
             if (InReserve) return;
 
-            if (Directory.Exists(GetReservePath()))
-            {
-                Directory.Delete(GetMainPath());
-            }
-            var moved = false;
-
-            while (!moved)
-            {
-                try
-                {
-                    Directory.Move(GetMainPath(),GetReservePath());
-                }
-                catch (IOException)
-                {
-                    continue;
-                }
-                moved = true;
-            }
+            MoveFolderToFolder(GetMainPath(),GetReservePath());
+            
             InReserve = true;
         }
 
+        /// <summary>
+        /// Move the Mod into the main mods folder
+        /// </summary>
         public void MoveToMain()
         {
             if (!InReserve) return;
 
-            if (Directory.Exists(GetMainPath()))
+            MoveFolderToFolder(GetReservePath(), GetMainPath());
+
+            InReserve = false;
+        }
+
+        /// <summary>
+        /// Move a folder to another folder overwriting any conflicting folder
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="dest"></param>
+        private void MoveFolderToFolder(string source, string dest)
+        {
+            if (Directory.Exists(dest))
             {
-                Directory.Delete(GetReservePath());
+                Directory.Delete(source,true);
+                return;
             }
             var moved = false;
 
@@ -82,7 +94,7 @@ namespace FactorioLoader.Main.Models.Mods
             {
                 try
                 {
-                    Directory.Move(GetReservePath(), GetMainPath());
+                    Directory.Move(source, dest);
                 }
                 catch (IOException)
                 {
@@ -90,7 +102,6 @@ namespace FactorioLoader.Main.Models.Mods
                 }
                 moved = true;
             }
-            InReserve = false;
         }
 
         public void Merge(Mod mod)
@@ -108,54 +119,37 @@ namespace FactorioLoader.Main.Models.Mods
             }
         }
 
-        /// <summary>
-        /// Download file data from a URL and grab the filename from it
-        /// </summary>
-        /// <param name="webClient"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        protected string GetFileNameFromUrl(WebClient webClient, string url)
-        {
-            var data = webClient.DownloadData(url);
-            if (!string.IsNullOrEmpty(webClient.ResponseHeaders["Content-Disposition"]))
-            {
-                var contentString = webClient.ResponseHeaders["Content-Disposition"];
-                var fileName = Regex.Match(contentString, @"filename.*'(.*)").Groups[1].ToString();
-                return fileName;
-            }
 
-            var name = FolderName ?? $"{Name}_{Version}";
-            return $"{name}.zip";
-        }
 
 
         /// <summary>
         /// TODO check if archive exists
-        /// Download the mod archive into the archives folder
+        /// Download the Mod archive into the archives folder
         /// </summary>
         /// <param name="modDownloadProgress"></param>
-        public void Download(ProgressBar modDownloadProgress)
+        public void Download(ProgressBar modDownloadProgress,Action<object,DownloadProgressChangedEventArgs> callback = null)
         {
-            using (var client = new WebClient())
-            {
-                var archivePath = App.FactorioLoader.Config.ArchiveFolder;
-                //TODO move this
-                if(!Directory.Exists(archivePath)) Directory.CreateDirectory(archivePath);
-
-                var fileName = GetFileNameFromUrl(client, Url);
-                var fileDownloadPath = archivePath + "\\"+fileName;
-                client.DownloadProgressChanged += (s,e)=> modDownloadProgressChanged(s,e,modDownloadProgress);
-                client.DownloadFileAsync(new Uri(Url), fileDownloadPath);
-            }
+            var modDownloader = new ModDownloader(this);
+            modDownloader.DownloadMod(modDownloadProgress,callback);
         }
+        
+        
 
-        private void modDownloadProgressChanged(
-            object sender, 
-            DownloadProgressChangedEventArgs e,
-            ProgressBar progressBar)
+        public void Extract(ProgressBar modDownloadProgress)
         {
-            progressBar.Step = e.ProgressPercentage;
-            progressBar.PerformStep();
+            if (!HaveArchive) throw new Exception("Mod archive not found");
+
+            var done = false;
+
+            while (!done)
+            {
+                try
+                {
+                    ZipFile.ExtractToDirectory(ArchivePath, App.FactorioLoader.Config.ReserveFolder);
+                    done = true;
+                }
+                catch (IOException){}
+            }
         }
     }
 }

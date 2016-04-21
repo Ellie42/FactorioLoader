@@ -38,6 +38,7 @@
             this.modFolder = new MetroFramework.Controls.MetroTextBox();
             this.setModFolderButton = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.handleProtocolCheckbox = new MetroFramework.Controls.MetroCheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -51,6 +52,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.handleProtocolCheckbox);
             this.panel1.Controls.Add(this.doneButton);
             this.panel1.Controls.Add(this.splitContainer2);
             this.panel1.Controls.Add(this.metroLabel2);
@@ -59,14 +61,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(20, 60);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(536, 150);
+            this.panel1.Size = new System.Drawing.Size(536, 149);
             this.panel1.TabIndex = 0;
             // 
             // doneButton
             // 
             this.doneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.doneButton.Image = null;
-            this.doneButton.Location = new System.Drawing.Point(429, 118);
+            this.doneButton.Location = new System.Drawing.Point(429, 117);
             this.doneButton.Name = "doneButton";
             this.doneButton.Size = new System.Drawing.Size(104, 29);
             this.doneButton.TabIndex = 6;
@@ -217,11 +219,21 @@
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = "Mod Folder";
             // 
+            // handleProtocolCheckbox
+            // 
+            this.handleProtocolCheckbox.AutoSize = true;
+            this.handleProtocolCheckbox.Location = new System.Drawing.Point(3, 131);
+            this.handleProtocolCheckbox.Name = "handleProtocolCheckbox";
+            this.handleProtocolCheckbox.Size = new System.Drawing.Size(285, 15);
+            this.handleProtocolCheckbox.TabIndex = 7;
+            this.handleProtocolCheckbox.Text = "Associate Factorio Loader with factoriomods.com";
+            this.handleProtocolCheckbox.UseSelectable = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 230);
+            this.ClientSize = new System.Drawing.Size(576, 229);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(575, 229);
             this.Name = "SettingsForm";
@@ -254,5 +266,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroButton setModFolderButton;
         private MetroFramework.Controls.MetroTextBox.MetroTextButton doneButton;
+        private MetroFramework.Controls.MetroCheckBox handleProtocolCheckbox;
     }
 }

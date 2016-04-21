@@ -89,6 +89,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -146,6 +150,7 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\Helpers\FormControlHelper.cs" />
+    <Compile Include="Main\Helpers\ModFileHelper.cs" />
     <Compile Include="Main\Models\Config\LoaderConfig.cs" />
     <Compile Include="Main\Models\Mods\Mod.cs" />
     <Compile Include="Main\Models\Mods\ModInitialiser.cs" />
@@ -153,6 +158,7 @@
     <Compile Include="Main\Models\Saveable.cs" />
     <Compile Include="Main\Models\SaveableConfig.cs" />
     <Compile Include="Main\Services\ModDataService.cs" />
+    <Compile Include="Main\Services\ModDownloader.cs" />
     <Compile Include="Main\Services\ModFileService.cs" />
     <Compile Include="Main\Services\ModProfileService.cs" />
     <Compile Include="Main\Services\ModService.cs" />
@@ -189,6 +195,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="factoriomodsprotocol.reg" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -199,7 +206,17 @@
   <ItemGroup>
     <None Include="NewFolder1\App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Shell32">
+      <Guid>{50A7E9B0-70EF-11D1-B75A-00A0C90564FE}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\factorio.jpg" />
   </ItemGroup>

@@ -34,11 +34,13 @@
             this.modDownloadProgress = new MetroFramework.Controls.MetroProgressBar();
             this.modVersion = new MetroFramework.Controls.MetroLabel();
             this.modName = new MetroFramework.Controls.MetroLabel();
+            this.downloadStatus = new MetroFramework.Controls.MetroLabel();
             this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.downloadStatus);
             this.mainPanel.Controls.Add(this.downloadButton);
             this.mainPanel.Controls.Add(this.cancelButton);
             this.mainPanel.Controls.Add(this.modDownloadProgress);
@@ -112,6 +114,15 @@
             this.modName.Text = "metroLabel3";
             this.modName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // downloadStatus
+            // 
+            this.downloadStatus.AutoSize = true;
+            this.downloadStatus.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.downloadStatus.Location = new System.Drawing.Point(4, 92);
+            this.downloadStatus.Name = "downloadStatus";
+            this.downloadStatus.Size = new System.Drawing.Size(0, 0);
+            this.downloadStatus.TabIndex = 9;
+            // 
             // ImportModForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,7 +131,7 @@
             this.Controls.Add(this.mainPanel);
             this.MinimumSize = new System.Drawing.Size(465, 219);
             this.Name = "ImportModForm";
-            this.Text = "Adding new mod";
+            this.Text = "Adding new Mod";
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -135,5 +146,6 @@
         private MetroFramework.Controls.MetroProgressBar modDownloadProgress;
         private MetroFramework.Controls.MetroTextBox.MetroTextButton downloadButton;
         private MetroFramework.Controls.MetroTextBox.MetroTextButton cancelButton;
+        private MetroFramework.Controls.MetroLabel downloadStatus;
     }
 }

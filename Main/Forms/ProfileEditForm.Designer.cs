@@ -28,20 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.removeModButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
             this.addModButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
-            this.curModDesc = new MetroFramework.Controls.MetroTextBox();
-            this.curModName = new MetroFramework.Controls.MetroLabel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.profileComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.deleteProfileButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.profileModsGrid = new MetroFramework.Controls.MetroGrid();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.availableModsGrid = new MetroFramework.Controls.MetroGrid();
@@ -50,24 +55,22 @@
             this.availableModsSections = new MetroFramework.Controls.MetroComboBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.doneButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
-            this.deleteProfileButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.profileComboBox = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.profileModsGrid = new MetroFramework.Controls.MetroGrid();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.curModDesc = new MetroFramework.Controls.MetroTextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.curModName = new MetroFramework.Controls.MetroLabel();
+            this.curModAuthor = new MetroFramework.Controls.MetroLabel();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profileModsGrid)).BeginInit();
             this.metroPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.availableModsGrid)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profileModsGrid)).BeginInit();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -100,7 +103,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 371F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(310, 371);
             this.tableLayoutPanel1.TabIndex = 18;
             // 
@@ -159,50 +162,133 @@
             this.addModButton.UseVisualStyleBackColor = true;
             this.addModButton.Click += new System.EventHandler(this.addModButton_Click);
             // 
-            // curModDesc
+            // panel2
             // 
+            this.panel2.Controls.Add(this.profileComboBox);
+            this.panel2.Controls.Add(this.deleteProfileButton);
+            this.panel2.Controls.Add(this.metroLabel2);
+            this.panel2.Controls.Add(this.profileModsGrid);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(33, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(274, 365);
+            this.panel2.TabIndex = 5;
             // 
+            // profileComboBox
             // 
+            this.profileComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.profileComboBox.FormattingEnabled = true;
+            this.profileComboBox.ItemHeight = 23;
+            this.profileComboBox.Items.AddRange(new object[] {
+            "Default"});
+            this.profileComboBox.Location = new System.Drawing.Point(3, 23);
+            this.profileComboBox.Name = "profileComboBox";
+            this.profileComboBox.Size = new System.Drawing.Size(268, 29);
+            this.profileComboBox.TabIndex = 30;
+            this.profileComboBox.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.profileComboBox.UseSelectable = true;
+            this.profileComboBox.SelectedIndexChanged += new System.EventHandler(this.profileComboBox_SelectedIndexChanged);
             // 
-            this.curModDesc.CustomButton.Image = null;
-            this.curModDesc.CustomButton.Location = new System.Drawing.Point(224, 2);
-            this.curModDesc.CustomButton.Name = "";
-            this.curModDesc.CustomButton.Size = new System.Drawing.Size(55, 55);
-            this.curModDesc.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.curModDesc.CustomButton.TabIndex = 1;
-            this.curModDesc.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.curModDesc.CustomButton.UseSelectable = true;
-            this.curModDesc.CustomButton.Visible = false;
-            this.curModDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.curModDesc.Lines = new string[] {
-        "Mod Description"};
-            this.curModDesc.Location = new System.Drawing.Point(0, 0);
-            this.curModDesc.MaxLength = 32767;
-            this.curModDesc.Multiline = true;
-            this.curModDesc.Name = "curModDesc";
-            this.curModDesc.PasswordChar = '\0';
-            this.curModDesc.ReadOnly = true;
-            this.curModDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.curModDesc.SelectedText = "";
-            this.curModDesc.SelectionLength = 0;
-            this.curModDesc.SelectionStart = 0;
-            this.curModDesc.Size = new System.Drawing.Size(282, 60);
-            this.curModDesc.TabIndex = 29;
-            this.curModDesc.Text = "Mod Description";
-            this.curModDesc.UseSelectable = true;
-            this.curModDesc.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.curModDesc.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // deleteProfileButton
             // 
-            // curModName
+            this.deleteProfileButton.Image = null;
+            this.deleteProfileButton.Location = new System.Drawing.Point(3, 0);
+            this.deleteProfileButton.Name = "deleteProfileButton";
+            this.deleteProfileButton.Size = new System.Drawing.Size(89, 19);
+            this.deleteProfileButton.Style = MetroFramework.MetroColorStyle.Red;
+            this.deleteProfileButton.TabIndex = 19;
+            this.deleteProfileButton.Text = "Delete Profile";
+            this.deleteProfileButton.UseCustomBackColor = true;
+            this.deleteProfileButton.UseCustomForeColor = true;
+            this.deleteProfileButton.UseSelectable = true;
+            this.deleteProfileButton.UseStyleColors = true;
+            this.deleteProfileButton.UseVisualStyleBackColor = true;
+            this.deleteProfileButton.Click += new System.EventHandler(this.deleteProfileButton_Click);
             // 
-            this.curModName.AutoSize = true;
-            this.curModName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.curModName.Location = new System.Drawing.Point(3, 0);
-            this.curModName.Name = "curModName";
-            this.curModName.Size = new System.Drawing.Size(200, 66);
-            this.curModName.TabIndex = 28;
-            this.curModName.Text = "Current Mod Name";
-            this.curModName.Theme = MetroFramework.MetroThemeStyle.Light;
+            // metroLabel2
+            // 
+            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(187, 0);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(84, 19);
+            this.metroLabel2.TabIndex = 29;
+            this.metroLabel2.Text = "Profile Mods";
+            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Light;
+            // 
+            // profileModsGrid
+            // 
+            this.profileModsGrid.AllowUserToAddRows = false;
+            this.profileModsGrid.AllowUserToDeleteRows = false;
+            this.profileModsGrid.AllowUserToResizeColumns = false;
+            this.profileModsGrid.AllowUserToResizeRows = false;
+            this.profileModsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.profileModsGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.profileModsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.profileModsGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.profileModsGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.profileModsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            this.profileModsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.profileModsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2});
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.profileModsGrid.DefaultCellStyle = dataGridViewCellStyle32;
+            this.profileModsGrid.EnableHeadersVisualStyles = false;
+            this.profileModsGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.profileModsGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.profileModsGrid.Location = new System.Drawing.Point(3, 57);
+            this.profileModsGrid.Name = "profileModsGrid";
+            this.profileModsGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.profileModsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
+            this.profileModsGrid.RowHeadersVisible = false;
+            this.profileModsGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.profileModsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.profileModsGrid.Size = new System.Drawing.Size(268, 305);
+            this.profileModsGrid.Style = MetroFramework.MetroColorStyle.Teal;
+            this.profileModsGrid.TabIndex = 28;
+            this.profileModsGrid.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.profileModsGrid.UseStyleColors = true;
+            this.profileModsGrid.SelectionChanged += new System.EventHandler(this.ChangeGridSelection);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.HeaderText = "Version";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 68;
             // 
             // metroPanel2
             // 
@@ -244,40 +330,40 @@
             this.availableModsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.availableModsGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.availableModsGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.availableModsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.availableModsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.availableModsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.availableModsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.modName,
             this.modVersion});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.availableModsGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.availableModsGrid.DefaultCellStyle = dataGridViewCellStyle35;
             this.availableModsGrid.EnableHeadersVisualStyles = false;
             this.availableModsGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.availableModsGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.availableModsGrid.Location = new System.Drawing.Point(3, 59);
             this.availableModsGrid.Name = "availableModsGrid";
             this.availableModsGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.availableModsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.availableModsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
             this.availableModsGrid.RowHeadersVisible = false;
             this.availableModsGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.availableModsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -323,15 +409,15 @@
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.4485F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.55149F));
+            this.tableLayoutPanel4.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.doneButton, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.curModName, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(288, 377);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(316, 66);
             this.tableLayoutPanel4.TabIndex = 0;
             this.tableLayoutPanel4.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel4_Paint);
@@ -349,134 +435,6 @@
             this.doneButton.UseVisualStyleBackColor = true;
             this.doneButton.Click += new System.EventHandler(this.doneButton_Click);
             // 
-            // deleteProfileButton
-            // 
-            this.deleteProfileButton.Image = null;
-            this.deleteProfileButton.Location = new System.Drawing.Point(3, 0);
-            this.deleteProfileButton.Name = "deleteProfileButton";
-            this.deleteProfileButton.Size = new System.Drawing.Size(89, 19);
-            this.deleteProfileButton.Style = MetroFramework.MetroColorStyle.Red;
-            this.deleteProfileButton.TabIndex = 19;
-            this.deleteProfileButton.Text = "Delete Profile";
-            this.deleteProfileButton.UseCustomBackColor = true;
-            this.deleteProfileButton.UseCustomForeColor = true;
-            this.deleteProfileButton.UseSelectable = true;
-            this.deleteProfileButton.UseStyleColors = true;
-            this.deleteProfileButton.UseVisualStyleBackColor = true;
-            this.deleteProfileButton.Click += new System.EventHandler(this.deleteProfileButton_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.profileComboBox);
-            this.panel2.Controls.Add(this.deleteProfileButton);
-            this.panel2.Controls.Add(this.metroLabel2);
-            this.panel2.Controls.Add(this.profileModsGrid);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(33, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(274, 365);
-            this.panel2.TabIndex = 5;
-            // 
-            // profileComboBox
-            // 
-            this.profileComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.profileComboBox.FormattingEnabled = true;
-            this.profileComboBox.ItemHeight = 23;
-            this.profileComboBox.Items.AddRange(new object[] {
-            "Default"});
-            this.profileComboBox.Location = new System.Drawing.Point(3, 23);
-            this.profileComboBox.Name = "profileComboBox";
-            this.profileComboBox.Size = new System.Drawing.Size(268, 29);
-            this.profileComboBox.TabIndex = 30;
-            this.profileComboBox.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.profileComboBox.UseSelectable = true;
-            this.profileComboBox.SelectedIndexChanged += new System.EventHandler(this.profileComboBox_SelectedIndexChanged);
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(187, 0);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(84, 19);
-            this.metroLabel2.TabIndex = 29;
-            this.metroLabel2.Text = "Profile Mods";
-            this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Light;
-            // 
-            // profileModsGrid
-            // 
-            this.profileModsGrid.AllowUserToAddRows = false;
-            this.profileModsGrid.AllowUserToDeleteRows = false;
-            this.profileModsGrid.AllowUserToResizeColumns = false;
-            this.profileModsGrid.AllowUserToResizeRows = false;
-            this.profileModsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.profileModsGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.profileModsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.profileModsGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.profileModsGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.profileModsGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.profileModsGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.profileModsGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.profileModsGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.profileModsGrid.EnableHeadersVisualStyles = false;
-            this.profileModsGrid.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.profileModsGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.profileModsGrid.Location = new System.Drawing.Point(3, 57);
-            this.profileModsGrid.Name = "profileModsGrid";
-            this.profileModsGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(201)))), ((int)(((byte)(206)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.profileModsGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.profileModsGrid.RowHeadersVisible = false;
-            this.profileModsGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.profileModsGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.profileModsGrid.Size = new System.Drawing.Size(268, 305);
-            this.profileModsGrid.Style = MetroFramework.MetroColorStyle.Teal;
-            this.profileModsGrid.TabIndex = 28;
-            this.profileModsGrid.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.profileModsGrid.UseStyleColors = true;
-            this.profileModsGrid.SelectionChanged += new System.EventHandler(this.ChangeGridSelection);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Version";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 68;
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.curModDesc);
@@ -485,6 +443,73 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(282, 60);
             this.panel3.TabIndex = 19;
+            // 
+            // curModDesc
+            // 
+            // 
+            // 
+            // 
+            this.curModDesc.CustomButton.Image = null;
+            this.curModDesc.CustomButton.Location = new System.Drawing.Point(224, 2);
+            this.curModDesc.CustomButton.Name = "";
+            this.curModDesc.CustomButton.Size = new System.Drawing.Size(55, 55);
+            this.curModDesc.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.curModDesc.CustomButton.TabIndex = 1;
+            this.curModDesc.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.curModDesc.CustomButton.UseSelectable = true;
+            this.curModDesc.CustomButton.Visible = false;
+            this.curModDesc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.curModDesc.Lines = new string[] {
+        "Mod Description"};
+            this.curModDesc.Location = new System.Drawing.Point(0, 0);
+            this.curModDesc.MaxLength = 32767;
+            this.curModDesc.Multiline = true;
+            this.curModDesc.Name = "curModDesc";
+            this.curModDesc.PasswordChar = '\0';
+            this.curModDesc.ReadOnly = true;
+            this.curModDesc.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.curModDesc.SelectedText = "";
+            this.curModDesc.SelectionLength = 0;
+            this.curModDesc.SelectionStart = 0;
+            this.curModDesc.Size = new System.Drawing.Size(282, 60);
+            this.curModDesc.TabIndex = 29;
+            this.curModDesc.Text = "Mod Description";
+            this.curModDesc.UseSelectable = true;
+            this.curModDesc.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.curModDesc.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.curModAuthor);
+            this.panel4.Controls.Add(this.curModName);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 60);
+            this.panel4.TabIndex = 31;
+            // 
+            // curModName
+            // 
+            this.curModName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.curModName.Location = new System.Drawing.Point(0, 0);
+            this.curModName.Name = "curModName";
+            this.curModName.Size = new System.Drawing.Size(200, 41);
+            this.curModName.TabIndex = 29;
+            this.curModName.Text = "Current Mod Name";
+            this.curModName.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.curModName.WrapToLine = true;
+            // 
+            // curModAuthor
+            // 
+            this.curModAuthor.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.curModAuthor.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.curModAuthor.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.curModAuthor.Location = new System.Drawing.Point(0, 41);
+            this.curModAuthor.Name = "curModAuthor";
+            this.curModAuthor.Size = new System.Drawing.Size(200, 19);
+            this.curModAuthor.TabIndex = 30;
+            this.curModAuthor.Text = "Current Mod Author";
+            this.curModAuthor.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // ProfileEditForm
             // 
@@ -501,15 +526,15 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profileModsGrid)).EndInit();
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.availableModsGrid)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profileModsGrid)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -527,7 +552,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private MetroFramework.Controls.MetroTextBox curModDesc;
-        private MetroFramework.Controls.MetroLabel curModName;
         private MetroFramework.Controls.MetroTextBox.MetroTextButton doneButton;
         private System.Windows.Forms.Panel panel1;
         private MetroFramework.Controls.MetroTextBox.MetroTextButton removeModButton;
@@ -540,5 +564,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private MetroFramework.Controls.MetroLabel curModAuthor;
+        private MetroFramework.Controls.MetroLabel curModName;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using MetroFramework;
 using MetroFramework.Forms;
 
 namespace FactorioLoader.Main.Forms
@@ -6,6 +7,12 @@ namespace FactorioLoader.Main.Forms
     public class ModLoaderForm : MetroForm
     {
         protected Form ActiveChildForm;
+
+        public void ShowMessage(string message)
+        {
+            var parent = ActiveChildForm ?? this;
+            MetroMessageBox.Show(parent, message,"Information",MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
 
         /// <summary>
         /// Show a form if no other child form is open, and set parent to this form

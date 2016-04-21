@@ -21,21 +21,27 @@ namespace FactorioLoader.Main.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            App.FactorioLoader.RunApp();
-            UpdateAllModDisplays();
+
         }
 
-//        private void DrawProfileComboBoxItem(object sender, DrawItemEventArgs e)
-//        {
-//            if(e.Index < 0) return;
-//            Font font = profileComboBox.Font;
-//            Brush brush = Brushes.Black;
-//            var text = profileComboBox.Items[e.Index] as string;
-//
-//            if (e.Index==profileComboBox.Items.Count-1) font = new Font(font, FontStyle.Bold);
-//
-//            e.Graphics.DrawString(text, font, brush, e.Bounds);
-//        }
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            App.FactorioLoader.RunApp();
+            UpdateAllModDisplays();
+            //            if (Args.Length < 1) return;
+        }
+
+        //        private void DrawProfileComboBoxItem(object sender, DrawItemEventArgs e)
+        //        {
+        //            if(e.Index < 0) return;
+        //            Font font = profileComboBox.Font;
+        //            Brush brush = Brushes.Black;
+        //            var text = profileComboBox.Items[e.Index] as string;
+        //
+        //            if (e.Index==profileComboBox.Items.Count-1) font = new Font(font, FontStyle.Bold);
+        //
+        //            e.Graphics.DrawString(text, font, brush, e.Bounds);
+        //        }
 
         /// <summary>
         /// When selecting a new profile
@@ -149,5 +155,7 @@ namespace FactorioLoader.Main.Forms
         {
             ShowChildForm(new SettingsForm());
         }
+
+
     }
 }

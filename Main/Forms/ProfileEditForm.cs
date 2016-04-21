@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using FactorioLoader.Main.Helpers;
@@ -10,8 +11,8 @@ using MetroFramework.Forms;
 
 namespace FactorioLoader.Main.Forms
 {
-    ///TODO if profile has a mod that does not exist in available mods add it
-    ///When a profile has mods that we do not have the data for then we should save it as an available mod
+    ///TODO if profile has a Mod that does not exist in available mods add it
+    ///When a profile has mods that we do not have the data for then we should save it as an available Mod
     /// in the DB so that you can add it in the future anyway.
     /// Probably should section off the mods without data in the grid
 
@@ -50,7 +51,7 @@ namespace FactorioLoader.Main.Forms
         }
 
         /// <summary>
-        /// Update all mod data displays
+        /// Update all Mod data displays
         /// </summary>
         private void UpdateAllModData()
         {
@@ -94,7 +95,7 @@ namespace FactorioLoader.Main.Forms
         }
 
         /// <summary>
-        /// Add mod to profile
+        /// Add Mod to profile
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -124,7 +125,7 @@ namespace FactorioLoader.Main.Forms
         /// <summary>
         /// When a grid selection changes then deselect all the other grids so 
         /// only a single grid has selections.
-        /// Also update the current mod data
+        /// Also update the current Mod data
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -157,6 +158,7 @@ namespace FactorioLoader.Main.Forms
             {
                 curModName.Text = "";
                 curModDesc.Text = "";
+                curModAuthor.Text = "";
                 return;
             }
 
@@ -165,12 +167,14 @@ namespace FactorioLoader.Main.Forms
             if (modCount > 1)
             {
                 curModName.Text = @"Various Mods...";
+                curModAuthor.Text = @"Various Authors...";
                 curModDesc.Text = mods.Aggregate("",(prev,next)=> prev+(next.Title ?? next.Name)+", ");
                 return;
             }
 
+            curModAuthor.Text = mods[0].Author ?? "";
             curModName.Text = mods[0].Title ?? mods[0].Name;
-            curModDesc.Text = mods[0].Description;
+            curModDesc.Text = mods[0].Description ?? "";
         }
 
         protected List<Mod> GetModsInCurrentSection()

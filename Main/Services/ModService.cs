@@ -22,16 +22,16 @@ namespace FactorioLoader.Main.Services
         }
         
         /// <summary>
-        /// Load all of the mod data, get available mods from the 
+        /// Load all of the Mod data, get available mods from the 
         /// reserve folder, add new mods found in the mods folder.
-        /// Also grab all stored mod data in the DB
+        /// Also grab all stored Mod data in the DB
         /// </summary>
         public void Init()
         {
             AvailableMods = new List<Mod>();
             //Get mods from DB first
             AvailableMods.AddRange(Data.GetModsFromDb());
-            //Get mods in the mod directory
+            //Get mods in the Mod directory
             try
             {
                 var modFolderMods = ScanDirForMods(App.FactorioLoader.Config.ModFolder);
@@ -39,7 +39,7 @@ namespace FactorioLoader.Main.Services
             }
             catch(PathMissingException)
             {
-                MessageBox.Show("Mod folder doesn't exist :(\nPlease set the mod folder before continuing");
+                MessageBox.Show("Mod folder doesn't exist :(\nPlease set the Mod folder before continuing");
                 App.FactorioLoader.Config.RequestModFolder();
             }
 
@@ -83,7 +83,7 @@ namespace FactorioLoader.Main.Services
         }
 
         /// <summary>
-        /// Find a mod in all available mods
+        /// Find a Mod in all available mods
         /// </summary>
         /// <param name="name"></param>
         /// <param name="version"></param>
@@ -121,7 +121,7 @@ namespace FactorioLoader.Main.Services
 
 
         /// <summary>
-        /// Move all mods in the profile to the main mod folder
+        /// Move all mods in the profile to the main Mod folder
         /// </summary>
         public void PrepareCurrentProfileMods()
         {
