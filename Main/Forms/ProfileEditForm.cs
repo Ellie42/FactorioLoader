@@ -125,7 +125,7 @@ namespace FactorioLoader.Main.Forms
         /// <summary>
         /// When a grid selection changes then deselect all the other grids so 
         /// only a single grid has selections.
-        /// Also update the Current Mod data
+        /// Also update the current Mod data
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

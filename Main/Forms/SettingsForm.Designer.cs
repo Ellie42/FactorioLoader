@@ -39,6 +39,7 @@
             this.modFolder = new MetroFramework.Controls.MetroTextBox();
             this.setModFolderButton = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.handleProtocolCheckbox = new MetroFramework.Controls.MetroCheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -229,6 +230,16 @@
             this.metroLabel1.Size = new System.Drawing.Size(79, 19);
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = "Mod Folder";
+            // 
+            // handleProtocolCheckbox
+            // 
+            this.handleProtocolCheckbox.AutoSize = true;
+            this.handleProtocolCheckbox.Location = new System.Drawing.Point(3, 131);
+            this.handleProtocolCheckbox.Name = "handleProtocolCheckbox";
+            this.handleProtocolCheckbox.Size = new System.Drawing.Size(285, 15);
+            this.handleProtocolCheckbox.TabIndex = 7;
+            this.handleProtocolCheckbox.Text = "Associate Factorio Loader with factoriomods.com";
+            this.handleProtocolCheckbox.UseSelectable = true;
             // 
             // SettingsForm
             // 
