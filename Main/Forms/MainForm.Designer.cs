@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainPanel = new MetroFramework.Controls.MetroPanel();
             this.topPanel = new MetroFramework.Controls.MetroPanel();
             this.newProfileTile = new MetroFramework.Controls.MetroTile();
@@ -101,8 +102,8 @@
             this.profileModsGrid.AllowUserToDeleteRows = false;
             this.profileModsGrid.AllowUserToResizeColumns = false;
             this.profileModsGrid.AllowUserToResizeRows = false;
-            this.profileModsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.profileModsGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.profileModsGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.profileModsGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -199,7 +200,7 @@
             this.startButton.Style = MetroFramework.MetroColorStyle.Green;
             this.startButton.TabIndex = 2;
             this.startButton.Text = "Play Factorio";
-            this.startButton.TileImage = global::FactorioLoader.Properties.Resources.factorio13;
+            this.startButton.TileImage = ((System.Drawing.Image)(resources.GetObject("startButton.TileImage")));
             this.startButton.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.startButton.UseSelectable = true;
             this.startButton.UseStyleColors = true;
@@ -220,7 +221,7 @@
             // 
             // profileComboBox
             // 
-            this.profileComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.profileComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.profileComboBox.FormattingEnabled = true;
             this.profileComboBox.ItemHeight = 23;

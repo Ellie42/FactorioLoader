@@ -2,10 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FactorioLoader.Main.Database;
 using FactorioLoader.Main.Forms;
@@ -58,13 +55,16 @@ namespace FactorioLoader.Main
         /// <returns></returns>
         protected static bool IsProtocolHandlerThis(RegistryKey topKey)
         {
-            if (topKey == null) return false;
-            var exePath = System.Reflection.Assembly.GetEntryAssembly().Location;
-            var commandKey = topKey.OpenSubKey("shell\\open\\command");
-            var commandString = commandKey.GetValue("");
+            var commandKey = topKey?.OpenSubKey("shell\\open\\command");
+            if (commandKey != null)
+            {
+                var commandString = commandKey.GetValue("");
 
-            //TODO make this a little more specific maybe
-            return Regex.IsMatch(commandString.ToString(), "FactorioLoader.exe");
+                //TODO make this a little more specific maybe
+                return Regex.IsMatch(commandString.ToString(), "FactorioLoader.exe");
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace FactorioLoader.Main
                 processInfo.Arguments = $"create \"{System.Reflection.Assembly.GetEntryAssembly().Location}\"";
                 var process = Process.Start(processInfo);
 
-                while (!process.HasExited)
+                while (process != null && !process.HasExited)
                 {
                     
                 }
@@ -110,7 +110,7 @@ namespace FactorioLoader.Main
         {
             var codebase = System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
 
-            var directoryName = System.IO.Path.GetDirectoryName(codebase);
+            var directoryName = Path.GetDirectoryName(codebase);
 
             if (directoryName != null)
             {
@@ -166,9 +166,7 @@ namespace FactorioLoader.Main
             
             if (factorioBase64.Groups.Count <= 1) return;
 
-            var base64String = "";
-
-            base64String = factorioBase64.Groups[1].ToString().TrimEnd('/');
+            var base64String = factorioBase64.Groups[1].ToString().TrimEnd('/');
 
             byte[] jsonBytes;
 
@@ -218,14 +216,14 @@ namespace FactorioLoader.Main
     }
     public class ApplicationController : WindowsFormsApplicationBase
     {
-        private Form mainForm;
+        private readonly Form mainForm;
         public ApplicationController(Form form)
         {
             //We keep a reference to main form 
             //To run and also use it when we need to bring to front
             mainForm = form;
-            this.IsSingleInstance = true;
-            this.StartupNextInstance += this_StartupNextInstance;
+            IsSingleInstance = true;
+            StartupNextInstance += this_StartupNextInstance;
         }
 
         void this_StartupNextInstance(object sender, StartupNextInstanceEventArgs e)
@@ -245,9 +243,9 @@ namespace FactorioLoader.Main
 
         protected override void OnCreateMainForm()
         {
-            this.MainForm = mainForm;
+            MainForm = mainForm;
             if (CommandLineArgs.Count <= 1) return; 
-            this.CommandLineArgs.CopyTo(((MainForm)this.MainForm).Args, 0);
+            CommandLineArgs.CopyTo(((MainForm)MainForm).Args, 0);
         }
     }
 }
