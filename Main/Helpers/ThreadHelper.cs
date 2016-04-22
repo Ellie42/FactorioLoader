@@ -4,13 +4,13 @@ namespace FactorioLoader.Main.Helpers
 {
     public class ThreadHelper
     {
-//        public WaitFor WaitFor(bool waitBool)
+//        public WaitWhile WaitWhile(bool waitBool)
 //        {
-//            return new WaitFor(waitBool);
+//            return new WaitWhile(waitBool);
 //        }
     }
 
-    public class WaitFor
+    public class WaitWhile
     {
         public bool IsTrue
         {
@@ -35,7 +35,7 @@ namespace FactorioLoader.Main.Helpers
         private DateTime startTime = DateTime.Now;
         private TimeSpan timeToWait;
 
-        public WaitFor Variable(bool var)
+        public WaitWhile Variable(bool var)
         {
             waitBool = var;
 
@@ -47,14 +47,14 @@ namespace FactorioLoader.Main.Helpers
             return DateTime.Now - startTime > timeToWait;
         }
 
-        public WaitFor OrError(TimeSpan time)
+        public WaitWhile OrError(TimeSpan time)
         {
             error = true;
             timeToWait = time;
             return this;
         }
 
-        public WaitFor Or(TimeSpan time)
+        public WaitWhile Or(TimeSpan time)
         {
             timeToWait = time;
             return this;

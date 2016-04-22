@@ -89,8 +89,9 @@ namespace FactorioLoader.Main.Models.Mods
                 return;
             }
             var moved = false;
+            var wait = new WaitWhile().OrError(new TimeSpan(0,0,5));
 
-            while (!moved)
+            while (wait.Variable(moved).IsFalse)
             {
                 try
                 {

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>factoriomods://eyJpZCI6MzI4LCJ1cmwiOiJodHRwOi8vd3d3LmZhY3RvcmlvbW9kcy5jb20vbW9kcy9taW5pbmctdG9vbHMiLCJjYXRlZ29yaWVzIjpbIm9yZXMiLCJtaW5pbmciLCJlcXVpcG1lbnQiLCJvaWwiLCJ0ZXJyYWluIiwiZW52aXJvbm1lbnQiXSwiYXV0aG9yIjoiQmluYmluSGZyIiwiY29udGFjdCI6IiIsInRpdGxlIjoiTWluaW5nIFRvb2xzIiwibmFtZSI6Ik1pbmluZ1Rvb2xzIiwiZGVzY3JpcHRpb24iOiJUb29scyB0byBzcGVlZCB5b3VyIG1pbmluZywgYW5kIHByb3ZpZGUgbmV3IHJlc291cmNlcy4iLCJob21lcGFnZSI6IiIsInJlbGVhc2VzIjpbeyJpZCI6NTExLCJ2ZXJzaW9uIjoiMS4wLjgiLCJyZWxlYXNlZF9hdCI6IjIwMTYtMDQtMjJUMDA6MDA6MDAuMDAwWiIsImdhbWVfdmVyc2lvbnMiOlsiMC4xMi54Il0sImRlcGVuZGVuY2llcyI6W10sImZpbGVzIjpbeyJpZCI6NTMzLCJuYW1lIjoiIiwibWlycm9yIjpudWxsLCJ1cmwiOiJodHRwczovL2ZvcnVtcy5mYWN0b3Jpby5jb20vZG93bmxvYWQvZmlsZS5waHA/aWQ9MTAyODkifV19XX0=</StartArguments>
+    <StartArguments>
+    </StartArguments>
   </PropertyGroup>
 </Project>

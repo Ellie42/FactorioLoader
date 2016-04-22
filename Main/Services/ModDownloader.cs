@@ -40,6 +40,7 @@ namespace FactorioLoader.Main.Services
 
         /// <summary>
         /// Download a mod
+        /// TODO refactor and make status optional somehow so downloads can be done without form
         /// </summary>
         /// <param name="modDownloadProgress"></param>
         /// <param name="status"></param>
@@ -48,7 +49,10 @@ namespace FactorioLoader.Main.Services
             DownloadStatus status,
             Action<object, DownloadProgressChangedEventArgs> callback)
         {
+            //This is to get the last thrown exception from within the loop
+            //(right now just to catch timeouts)
             Exception exception = null;
+
             foreach (ModUrl url in Urls)
             {
                 var downloaded = false;
@@ -70,9 +74,12 @@ namespace FactorioLoader.Main.Services
                     continue;
                 }
                 
-                var wait = new WaitFor().OrError(new TimeSpan(0,0,15));
+                var wait = new WaitWhile().OrError(new TimeSpan(0,0,15));
+
                 try
                 {
+                    //Wait until we have started downloading or if 
+                    //we go over the timeout then just move to the next url
                     while (wait.Variable(downloading).IsFalse) { }
                 }
                 catch (Exceptions.TimeoutException ex)
@@ -83,26 +90,18 @@ namespace FactorioLoader.Main.Services
 
                 while (!downloaded) { }
 
-                var path = GetDownloadPath(Mod);
-
-                SevenZipExtractor extractor;
-
-                if (ModFileHelper.IsArchive(path, out extractor))
-                {
-                    TryExtractMod(path,extractor, status);
-
-                    status.CancelButton.Invoke((MethodInvoker) (
-                        () =>
-                        {
-                            status.CancelButton.Text = @"Done";
-                            status.Label.Text = @"Mod added successfully!";
-                        }));
-
-                    return;
-                }
-//                 File.Delete(path);
+                if (ExtractMod(status)) return;
             }
 
+            ThrowModDownloadException(exception);
+        }
+
+        /// <summary>
+        /// Check which type of exception should be thrown and then throw it!
+        /// </summary>
+        /// <param name="exception"></param>
+        private void ThrowModDownloadException(Exception exception)
+        {
             if (exception != null) throw exception;
 
             if (Urls.Urls.Count >= 1)
@@ -113,6 +112,39 @@ namespace FactorioLoader.Main.Services
             throw new Exception("Could not download mod");
         }
 
+        /// <summary>
+        /// Extract the current mod
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        private bool ExtractMod(DownloadStatus status)
+        {
+            var path = GetDownloadPath(Mod);
+
+            SevenZipExtractor extractor;
+
+            if (ModFileHelper.IsArchive(path, out extractor))
+            {
+                TryExtractMod(path, extractor, status);
+
+                status.CancelButton.Invoke((MethodInvoker)(
+                    () =>
+                    {
+                        status.CancelButton.Text = @"Done";
+                        status.Label.Text = @"Mod added successfully!";
+                    }));
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Extract a file to a path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="extractor"></param>
+        /// <param name="status"></param>
         private void TryExtractMod(string path, SevenZipExtractor extractor, DownloadStatus status)
         {
             status.Label.Invoke(

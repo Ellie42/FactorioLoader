@@ -164,6 +164,7 @@ namespace FactorioLoader.Main
         /// <param name="args"></param>
         private void ImportFromArgs(ReadOnlyCollection<string> args)
         {
+            //There is no argument to attempt to import
             if (args.Count <= 1) return;
 
             var factorioBase64 = Regex.Match(args[1], @"factoriomods:\/\/(.*)");
@@ -174,7 +175,7 @@ namespace FactorioLoader.Main
 
             byte[] jsonBytes;
 
-            //If jsonstring is invalid base64 then ignore it.
+            //If jsonstring is invalid base64 then stop import
             try
             {
                 jsonBytes = Convert.FromBase64String(base64String);

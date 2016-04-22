@@ -27,3 +27,4 @@ C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoa
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.csproj.ResolveComReference.cache
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\bin\Debug\MimeSharp.dll
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\bin\Debug\SevenZipSharp.dll
+C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.csprojResolveAssemblyReference.cache

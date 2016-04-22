@@ -27,20 +27,7 @@ namespace FactorioLoader.Main.Forms
         {
             App.FactorioLoader.RunApp();
             UpdateAllModDisplays();
-            //            if (Args.Length < 1) return;
         }
-
-        //        private void DrawProfileComboBoxItem(object sender, DrawItemEventArgs e)
-        //        {
-        //            if(e.Index < 0) return;
-        //            Font font = profileComboBox.Font;
-        //            Brush brush = Brushes.Black;
-        //            var text = profileComboBox.Items[e.Index] as string;
-        //
-        //            if (e.Index==profileComboBox.Items.Count-1) font = new Font(font, FontStyle.Bold);
-        //
-        //            e.Graphics.DrawString(text, font, brush, e.Bounds);
-        //        }
 
         /// <summary>
         /// When selecting a new profile
@@ -126,6 +113,8 @@ namespace FactorioLoader.Main.Forms
                     "Could not start factorio.exe, please check the executable path.",
                     "Could Not Start Factorio",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+
+            Application.Exit();
         }
 
         /// <summary>
