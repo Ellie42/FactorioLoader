@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using FactorioLoader.Main.Models.Mods;
 using MetroFramework.Controls;
@@ -10,23 +11,14 @@ namespace FactorioLoader.Main.Helpers
     {
         public static List<Mod> GetModsFromGridSelection(MetroGrid grid)
         {
-            var mods = new List<Mod>();
-            foreach (DataGridViewRow row in grid.SelectedRows)
-            {
-                var name = row.Cells[0].Value as string;
-                var version = row.Cells[1].Value as string;
-                if (name==null || version==null) continue;
-                var foundMod = App.FactorioLoader.Mods.FindModInAvailable(name, version)
-                    ?? new Mod()
-                    {
-                        Name = name,
-                        Version = version
-                    };
-
-                mods.Add(foundMod);
-            }
-
-            return mods;
+            return (from DataGridViewRow row in grid.SelectedRows
+                let name = row.Cells[0].Value as string
+                let version = row.Cells[1].Value as string
+                where name != null && version != null
+                select App.FactorioLoader.Mods.FindModInAvailable(name, version) ?? new Mod()
+                {
+                    Name = name, Version = version
+                }).ToList();
         }
 
         public static void PopulateGridWithMods(MetroGrid grid, List<Mod> mods)

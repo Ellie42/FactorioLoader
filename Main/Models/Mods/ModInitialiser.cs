@@ -52,9 +52,10 @@ namespace FactorioLoader.Main.Models.Mods
 
             var release = json["releases"][0];
             Id = release["id"].Value<string>();
-            Version = release["version"].Value<string>();
-            Url = release["files"][0]["url"].Value<string>();
-            Mirror = release["files"][0]["mirror"].Value<string>();
+            Version = GetValueFromJson(release as JObject, "version") as string;
+            var files = release["files"][0];
+            Url = GetValueFromJson(files as JObject, "url")as string;
+            Mirror = GetValueFromJson(files as JObject, "mirror")as string;
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using FactorioLoader.Main.Database;
@@ -28,6 +29,9 @@ namespace FactorioLoader.Main
 
         public FactorioLoader()
         {
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Environment.Is64BitProcess ? "x64" : "x86", "7z.dll");
+            SevenZip.SevenZipBase.SetLibraryPath(path);
+
             Profiles = new ModProfileService();
             Mods = new ModService();
             Config = new LoaderConfig();
@@ -181,7 +185,15 @@ namespace FactorioLoader.Main
             }
 
             var jsonString = System.Text.Encoding.Default.GetString(jsonBytes);
-            var json = JsonConvert.DeserializeObject<JObject>(jsonString);
+            JObject json;
+            try
+            {
+                json = JsonConvert.DeserializeObject<JObject>(jsonString);
+            }
+            catch (Exception)
+            {
+                return;
+            }
             var mod = new Mod(json);
 
             if (Mods.FindModInAvailable(mod.Name, mod.Version) != null)

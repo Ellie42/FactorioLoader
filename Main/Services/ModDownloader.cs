@@ -1,104 +1,185 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using FactorioLoader.Main.Exceptions;
+using FactorioLoader.Main.Forms;
 using FactorioLoader.Main.Helpers;
+using FactorioLoader.Main.Models.Download;
 using FactorioLoader.Main.Models.Mods;
+using MetroFramework.Controls;
+using MimeSharp;
+using SevenZip;
 
 namespace FactorioLoader.Main.Services
 {
     public class ModDownloader
     {
         public Mod Mod;
-        public string Url;
-        protected ModFileHelper.ModFileType UrlType;
+        public ModUrlList Urls;
 
         public ModDownloader(Mod mod)
         {
             Mod = mod;
-
-            Url = GetValidUrl(mod.Url, mod.Mirror);
+            Urls = GetValidUrls(mod);
         }
 
-        //TODO make better
-        private string GetValidUrl(string url, string mirror)
+        private ModUrlList GetValidUrls(Mod mod)
         {
-            var urlType = ModFileHelper.GetTypeFromUrl(url);
-            if (urlType != ModFileHelper.ModFileType.Null &&
-                urlType != ModFileHelper.ModFileType.Unknown)
-            {
-                UrlType = urlType;
-                return url;
-            }
-            var mirrorType = ModFileHelper.GetTypeFromUrl(mirror);
-            if (mirrorType != ModFileHelper.ModFileType.Null &&
-                mirrorType != ModFileHelper.ModFileType.Unknown)
-            {
-                UrlType = mirrorType;
-                return mirror;
-            }
+            return new ModUrlList(mod);
+        }
 
-            return null;
+        //TODO Refactor everything in this class
+        protected string GetDownloadPath(Mod mod)
+        {
+            return $"{App.FactorioLoader.Config.ArchiveFolder}\\{mod.Name}_{mod.Version}";
         }
 
         /// <summary>
-        /// Download file data from a URL and grab the filename from it
-        /// TODO loop through all urls
+        /// Download a mod
         /// </summary>
-        /// <param name="webClient"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        protected string GetFileNameFromUrl(WebClient webClient, string url)
+        /// <param name="modDownloadProgress"></param>
+        /// <param name="status"></param>
+        /// <param name="callback"></param>
+        public void DownloadMod(
+            DownloadStatus status,
+            Action<object, DownloadProgressChangedEventArgs> callback)
         {
-            var data = webClient.DownloadData(url);
-            if (!string.IsNullOrEmpty(webClient.ResponseHeaders["Content-Disposition"]))
+            Exception exception = null;
+            foreach (ModUrl url in Urls)
             {
-                var contentString = webClient.ResponseHeaders["Content-Disposition"];
-                var fileName = Regex.Match(contentString, @"filename.*'(.*)").Groups[1].ToString();
-                return fileName;
-            }
-
-            var name = Mod.FolderName ?? $"{Mod.Name}_{Mod.Version}";
-            Mod.FolderName = name;
-            return UrlType==ModFileHelper.ModFileType.Zip?$"{name}.zip":name;
-        }
-
-        public void DownloadMod(ProgressBar modDownloadProgress,Action<object,DownloadProgressChangedEventArgs> callback )
-        {
-            if (Url == null)
-            {
-                throw new Exception($"Cannot download mod from {Mod.Url} or {Mod.Mirror}");
-            }
-
-            if (UrlType != ModFileHelper.ModFileType.Zip) throw new Exception($"Cannot download mod from {Mod.Url} or {Mod.Mirror}"); ;
-
-            using (var client = new WebClient())
-            {
-                client.DownloadProgressChanged += (obj, e) => { if (e.ProgressPercentage >= 100) Mod.HaveArchive = true; };
-
-                var archive = App.FactorioLoader.Config.ArchiveFolder;
-
-                var fileName = GetFileNameFromUrl(client, Url);
-                var fileDownloadPath = archive + "\\" + fileName;
-                Mod.ArchivePath = fileDownloadPath;
-                client.DownloadProgressChanged += (s, e) => modDownloadProgressChanged(s, e, modDownloadProgress);
-                //Add the callback after the modDownloadProgressChanged action so that you can reset
-                //the progress bar in the callback
-                if (callback != null)
+                var downloaded = false;
+                var downloading = false;
+                try
                 {
-                    client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(callback);
+                    var client = TryDownload(url,status);
+                    client.DownloadProgressChanged += (s, e) =>
+                    {
+                        downloading = true;
+                        if (e.ProgressPercentage >= 100)
+                        {
+                            downloaded = true;
+                        }
+                    };
                 }
-                client.DownloadFileAsync(new Uri(Url), fileDownloadPath);
+                catch (Exception)
+                {
+                    continue;
+                }
+                
+                var wait = new WaitFor().OrError(new TimeSpan(0,0,15));
+                try
+                {
+                    while (wait.Variable(downloading).IsFalse) { }
+                }
+                catch (Exceptions.TimeoutException ex)
+                {
+                    exception = ex;
+                    continue;
+                }
+
+                while (!downloaded) { }
+
+                var path = GetDownloadPath(Mod);
+
+                SevenZipExtractor extractor;
+
+                if (ModFileHelper.IsArchive(path, out extractor))
+                {
+                    TryExtractMod(path,extractor, status);
+
+                    status.CancelButton.Invoke((MethodInvoker) (
+                        () =>
+                        {
+                            status.CancelButton.Text = @"Done";
+                            status.Label.Text = @"Mod added successfully!";
+                        }));
+
+                    return;
+                }
+//                 File.Delete(path);
             }
+
+            if (exception != null) throw exception;
+
+            if (Urls.Urls.Count >= 1)
+            {
+                throw new ModFileUnavailableException(Urls.Urls[0]);
+            }
+
+            throw new Exception("Could not download mod");
         }
-        private void modDownloadProgressChanged(
-            object sender,
-            DownloadProgressChangedEventArgs e,
-            ProgressBar progressBar)
+
+        private void TryExtractMod(string path, SevenZipExtractor extractor, DownloadStatus status)
         {
-            progressBar.Step = e.ProgressPercentage;
-            progressBar.PerformStep();
+            status.Label.Invoke(
+                (MethodInvoker)(() =>
+                {
+                    status.Label.Text = @"Extracting Files...";
+                    status.ProgressBar.Step = -100;
+                    status.ProgressBar.PerformStep();
+                }));
+
+            extractor.Extracting += (sender, e) => Extractor_Extracting(sender, e, status);
+            Mod.ArchivePath = path;
+            var folderPath = App.FactorioLoader.Config.ReserveFolder + "\\" + Mod.FolderName;
+            ModFileHelper.Extract(extractor, folderPath);
+        }
+
+        /// <summary>
+        /// Attempt to download whatever the url points to
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="status"></param>
+        /// <param name="modDownloadProgress"></param>
+        private WebClient TryDownload(ModUrl url, DownloadStatus status)
+        {
+            status.Label.Invoke(
+                (MethodInvoker)(() =>
+                {
+                    status.Label.Text = @"Downloading Mod...";
+                    status.ProgressBar.Value = 0;
+                }));
+
+            var downloadPath = GetDownloadPath(Mod);
+            var client = new WebClient();
+
+            client.DownloadProgressChanged += (s,e)=> ModDownloadProgressChanged(s,e,status);
+
+            client.DownloadFileAsync(new Uri(url.Url), downloadPath);
+            return client;
+        }
+
+        /// <summary>
+        /// Update the progress bar while downloading
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        /// <param name="status"></param>
+        private void ModDownloadProgressChanged(object sender,
+            DownloadProgressChangedEventArgs args,
+            DownloadStatus status)
+        {   
+            status.Label.Invoke(
+                (MethodInvoker)(() =>
+                {
+                    status.ProgressBar.Step = args.ProgressPercentage;
+                    status.ProgressBar.PerformStep();
+                }));
+        }
+
+        private void Extractor_Extracting(object sender, ProgressEventArgs e, DownloadStatus status)
+        {
+//            progress.Value = e.PercentDone;
+            status.Label.Invoke(
+                (MethodInvoker)(() =>
+                {
+                    status.ProgressBar.Step = e.PercentDelta;
+                    status.ProgressBar.PerformStep();
+                }));
         }
     }
 }

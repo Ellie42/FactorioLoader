@@ -1,5 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using FactorioLoader.Main.Models.Mods;
+using MimeSharp;
+using SevenZip;
 
 namespace FactorioLoader.Main.Helpers
 {
@@ -10,30 +16,34 @@ namespace FactorioLoader.Main.Helpers
             File,Zip,Folder,GitHubRelease,Unknown,Null
         }
 
-        public static ModFileType GetTypeFromUrl(string url)
+        public static bool IsArchive(string path,out SevenZipExtractor extractor)
         {
-            if (url == null) return ModFileType.Null;
-
-            if(IsZip(url)) return ModFileType.Zip;
-
-            return ModFileType.Unknown;
+            var done = false;
+            SevenZipExtractor file = null;
+            while (!done)
+            {
+                try
+                {
+                    file = new SevenZipExtractor(File.OpenRead(path));
+                }
+                catch (IOException)
+                {
+                    continue;
+                }
+                catch (Exception)
+                {
+                    extractor = file;
+                    return false;
+                }
+                done = true;
+            }
+            extractor = file;
+            return extractor.Check();
         }
 
-        private static bool IsZip(string url)
+        public static void Extract(SevenZipExtractor extractor, string dest)
         {
-            var matches =
-                Regex.Match(url, @"(?:([^:\/?#]+):)?(?:\/\/([^\/?#]*))?([^?#]*\.(?:zip))(?:\?([^#]*))?(?:#(.*))?");
-            if (matches.Groups.Count > 1)
-            {
-                return true;
-            }
-
-            if (Regex.IsMatch(url, @"(forums.factorio.com\/download\/file.php)"))
-            {
-                return true;
-            }
-
-            return false;
+            extractor.ExtractArchive(dest);
         }
     }
 }

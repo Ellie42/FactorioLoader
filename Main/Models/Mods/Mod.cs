@@ -120,36 +120,37 @@ namespace FactorioLoader.Main.Models.Mods
         }
 
 
-
-
-        /// <summary>
-        /// TODO check if archive exists
-        /// Download the Mod archive into the archives folder
-        /// </summary>
-        /// <param name="modDownloadProgress"></param>
-        public void Download(ProgressBar modDownloadProgress,Action<object,DownloadProgressChangedEventArgs> callback = null)
-        {
-            var modDownloader = new ModDownloader(this);
-            modDownloader.DownloadMod(modDownloadProgress,callback);
-        }
+//        /// <summary>
+//        /// TODO check if archive exists
+//        /// Download the Mod archive into the archives folder
+//        /// </summary>
+//        /// <param name="modDownloadProgress"></param>
+//        /// <param name="status"></param>
+//        public void Download(ProgressBar modDownloadProgress,
+//            MetroLabel status,
+//            Action<object,DownloadProgressChangedEventArgs> callback = null)
+//        {
+//            var modDownloader = new ModDownloader(this);
+//            modDownloader.DownloadMod(modDownloadProgress,status,callback);
+//        }
+//        
         
-        
 
-        public void Extract(ProgressBar modDownloadProgress)
-        {
-            if (!HaveArchive) throw new Exception("Mod archive not found");
-
-            var done = false;
-
-            while (!done)
-            {
-                try
-                {
-                    ZipFile.ExtractToDirectory(ArchivePath, App.FactorioLoader.Config.ReserveFolder);
-                    done = true;
-                }
-                catch (IOException){}
-            }
-        }
+//        public void Extract(ProgressBar modDownloadProgress)
+//        {
+//            if (!HaveArchive) throw new Exception("Mod archive not found");
+//
+//            var done = false;
+//
+//            while (!done)
+//            {
+//                try
+//                {
+//                    ZipFile.ExtractToDirectory(ArchivePath, App.FactorioLoader.Config.ReserveFolder);
+//                    done = true;
+//                }
+//                catch (IOException){}
+//            }
+//        }
     }
 }

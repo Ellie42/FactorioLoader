@@ -68,8 +68,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MimeSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeSharp.1.0.0\lib\MimeSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SevenZipSharp, Version=0.64.3890.29348, Culture=neutral, PublicKeyToken=20de82c62b055c88, processorArchitecture=MSIL">
+      <HintPath>..\packages\SevenZipSharp.0.64\lib\SevenZipSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -112,7 +120,9 @@
     <Compile Include="Main\Database\DatabaseFacade.cs" />
     <Compile Include="Main\Database\DatabaseSetup.cs" />
     <Compile Include="Main\Database\ModDatabaseSetup.cs" />
+    <Compile Include="Main\Exceptions\ModFileUnavailableException.cs" />
     <Compile Include="Main\Exceptions\PathMissingException.cs" />
+    <Compile Include="Main\Exceptions\TimeoutException.cs" />
     <Compile Include="Main\FactorioLoader.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,9 +159,12 @@
     <Compile Include="Main\Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Main\Helpers\DownloadStatus.cs" />
     <Compile Include="Main\Helpers\FormControlHelper.cs" />
     <Compile Include="Main\Helpers\ModFileHelper.cs" />
+    <Compile Include="Main\Helpers\ThreadHelper.cs" />
     <Compile Include="Main\Models\Config\LoaderConfig.cs" />
+    <Compile Include="Main\Models\Download\ModUrl.cs" />
     <Compile Include="Main\Models\Download\ModUrlList.cs" />
     <Compile Include="Main\Models\Mods\Mod.cs" />
     <Compile Include="Main\Models\Mods\ModInitialiser.cs" />
@@ -247,6 +260,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.100.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.100.0\build\net451\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\SevenZipSharp.Interop.9.38.2\build\SevenZipSharp.Interop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SevenZipSharp.Interop.9.38.2\build\SevenZipSharp.Interop.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -261,4 +275,5 @@
     </ItemGroup>
     <Move SourceFiles="@(MoveToLibFolder)" DestinationFolder="$(OutputPath)lib" OverwriteReadOnlyFiles="true" />
   </Target>
+  <Import Project="..\packages\SevenZipSharp.Interop.9.38.2\build\SevenZipSharp.Interop.targets" Condition="Exists('..\packages\SevenZipSharp.Interop.9.38.2\build\SevenZipSharp.Interop.targets')" />
 </Project>
