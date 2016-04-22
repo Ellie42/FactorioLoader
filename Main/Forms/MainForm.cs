@@ -11,7 +11,6 @@ namespace FactorioLoader.Main.Forms
 {
     public partial class MainForm : ModLoaderForm
     {
-
         public MainForm()
         {
             InitializeComponent();
@@ -90,7 +89,7 @@ namespace FactorioLoader.Main.Forms
         }
 
         /// <summary>
-        /// Display all the mods of the current profile
+        /// Display all the mods of the Current profile
         /// </summary>
         private void UpdateProfileModsGrid()
         {

@@ -119,7 +119,7 @@ namespace FactorioLoader.Main.Models.Profile
         }
 
         /// <summary>
-        /// Set the current profile Id to the last inserted Id
+        /// Set the Current profile Id to the last inserted Id
         /// </summary>
         /// <param name="connection"></param>
         private void SetInsertId(SQLiteConnection connection)

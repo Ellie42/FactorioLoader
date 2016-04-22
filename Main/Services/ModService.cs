@@ -62,7 +62,7 @@ namespace FactorioLoader.Main.Services
         }
 
         /// <summary>
-        /// Get all mods that we have the files for that are not added to the current profile
+        /// Get all mods that we have the files for that are not added to the Current profile
         /// </summary>
         /// <returns></returns>
         /// 
@@ -97,7 +97,7 @@ namespace FactorioLoader.Main.Services
         }
 
         /// <summary>
-        /// Merge a list of mods found in folders with the current available mods from DB
+        /// Merge a list of mods found in folders with the Current available mods from DB
         /// and adds to the availableMods list
         /// </summary>
         /// <param name="mods"></param>

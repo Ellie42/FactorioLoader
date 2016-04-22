@@ -25,3 +25,4 @@ C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoa
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.Main.Forms.ImportModForm.resources
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\Interop.Shell32.dll
 C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.csproj.ResolveComReference.cache
+C:\Users\Sophie\Documents\Visual Studio 2015\Projects\FactorioLoader\FactorioLoader\obj\Debug\FactorioLoader.csprojResolveAssemblyReference.cache

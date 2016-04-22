@@ -51,7 +51,7 @@ namespace FactorioLoader.Main.Helpers
                 grid.Rows.Add(mod.Title ?? mod.Name, mod.Version);
             }
 
-            //If the old scroll position was higher than the current number of items then reset
+            //If the old scroll position was higher than the Current number of items then reset
             //the scroll position
             if (scrollIndex > grid.RowCount - 1 || scrollIndex < 0)
             {

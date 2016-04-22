@@ -1,4 +1,5 @@
-﻿using MetroFramework.Forms;
+﻿using System;
+using MetroFramework.Forms;
 
 namespace FactorioLoader.Main.Forms
 {
@@ -20,6 +21,7 @@ namespace FactorioLoader.Main.Forms
         {
             modFolder.Text = App.FactorioLoader.Config.ModFolder;
             exeFolder.Text = App.FactorioLoader.Config.ExecutablePath;
+            handleProtocolCheckbox.Checked = App.FactorioLoader.IsProtocolHandler;
         }
 
         private void setModFolderButton_Click(object sender, System.EventArgs e)
@@ -46,6 +48,12 @@ namespace FactorioLoader.Main.Forms
         private void doneButton_Click(object sender, System.EventArgs e)
         {
             Close();
+        }
+
+
+        //TODO Implement
+        private void handleProtocolCheckbox_CheckedChanged(object sender, System.EventArgs e)
+        {
         }
     }
 }

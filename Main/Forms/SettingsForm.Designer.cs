@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.handleProtocolCheckbox = new MetroFramework.Controls.MetroCheckBox();
             this.doneButton = new MetroFramework.Controls.MetroTextBox.MetroTextButton();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.exeFolder = new MetroFramework.Controls.MetroTextBox();
@@ -38,7 +39,6 @@
             this.modFolder = new MetroFramework.Controls.MetroTextBox();
             this.setModFolderButton = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.handleProtocolCheckbox = new MetroFramework.Controls.MetroCheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -63,6 +63,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(536, 149);
             this.panel1.TabIndex = 0;
+            // 
+            // handleProtocolCheckbox
+            // 
+            this.handleProtocolCheckbox.AutoSize = true;
+            this.handleProtocolCheckbox.Location = new System.Drawing.Point(3, 131);
+            this.handleProtocolCheckbox.Name = "handleProtocolCheckbox";
+            this.handleProtocolCheckbox.Size = new System.Drawing.Size(267, 15);
+            this.handleProtocolCheckbox.TabIndex = 7;
+            this.handleProtocolCheckbox.Text = "Use Factorlo Loader with factoriomods:// links";
+            this.handleProtocolCheckbox.UseSelectable = true;
+            this.handleProtocolCheckbox.CheckedChanged += new System.EventHandler(this.handleProtocolCheckbox_CheckedChanged);
             // 
             // doneButton
             // 
@@ -218,16 +229,6 @@
             this.metroLabel1.Size = new System.Drawing.Size(79, 19);
             this.metroLabel1.TabIndex = 0;
             this.metroLabel1.Text = "Mod Folder";
-            // 
-            // handleProtocolCheckbox
-            // 
-            this.handleProtocolCheckbox.AutoSize = true;
-            this.handleProtocolCheckbox.Location = new System.Drawing.Point(3, 131);
-            this.handleProtocolCheckbox.Name = "handleProtocolCheckbox";
-            this.handleProtocolCheckbox.Size = new System.Drawing.Size(285, 15);
-            this.handleProtocolCheckbox.TabIndex = 7;
-            this.handleProtocolCheckbox.Text = "Associate Factorio Loader with factoriomods.com";
-            this.handleProtocolCheckbox.UseSelectable = true;
             // 
             // SettingsForm
             // 
